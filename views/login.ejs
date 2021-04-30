@@ -1,0 +1,12 @@
+<%- include('partials/header') -%>
+<h2>Login to your GraveWatch Account</h2>
+    <form method="post" action="/login">
+        <label>Email Account: <input type="email" name="email"></label>
+        <label>Password: <input type="password" name="password"></label>
+        <button type="submit">Submit</button>
+    </form>
+    <div>
+        <p>Don't have a GraveWatch account?</p>
+        <p>Sign up <a href="../signup">here</a></p>
+    </div>
+<%- include('partials/footer') -%>
