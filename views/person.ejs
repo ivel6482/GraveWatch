@@ -1,9 +1,49 @@
 <%- include('partials/header') -%>
+<section class=''>
+<p>this is person.ejs</p>
 
-    /*
-    TODO:
-    display person details
-    if signed in and created person, show delete/update option(s)
-    */
+    <h1>Grave Watch</h1>
+    <section class="mainsectiontop">
+        <article class="leftsection">
+            <section class="submission">
+                <p class="name">Name: <%= person.name %></p>
+                <p class="submittedby">Submitted By: </p>
+                <p class="datesubmitted">Date Submitted: <%= person.createdAt %></p>
+                <p class="status">Status: <%= person.status %></p>
+            </section>
+            <section class="bigimage">this is big image</section>
+            <section class="smallerimges">
+                <span>img1</span>
+                <span>img2</span>
+                <span>img3</span>
+                <span>img4</span>
+            </section>
+        </article>
+        <article class="rightsection">
+            <h2>Last Seen</h2>
+            <section class="mapimage">map image</section>
+            <section>
+                <span class="Date">Date: <%= person.lastSeenDate %> </span>
+                <span class="Location">Location:</span>
+            </section>
+        </article>
+    </section>
+    <h2>Description</h2>
+    <section class="mainsectionbottom">
+            <section class="leftsection">
+                <p class="DOB">Date Of Birth: <%= person.dateOfBirth %></p>
+                <p class="hair">Hair Color: <%= person.hairColor %></p>
+                <p class="height">Height: <%= person.height %></p>
+                <p class="race">Race: <%= person.race %> </p>
+            </section>
+            <section class="rightsection">
+                <p class="birthplace">Birth Place: <%= person.birthplace %></p>
+                <p class="eyes">Eye Color: <%= person.eyes %> </p>
+                <p class="weight">Weight: <%= person.weight %> </p>
+                <p class="sex">Sex: <%= person.sex %> </p>
+            </section>
+        </section>
+    </section>
+    <%= `${person}` %>
 
 <%- include('partials/footer') -%>
