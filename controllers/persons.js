@@ -50,6 +50,7 @@ module.exports = {
         user: req.user
       })
       res.redirect(`/persons/${person._id}`)
+
     }catch(err){
       console.log(err)
     }
