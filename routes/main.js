@@ -17,7 +17,8 @@ router.post('/login', authController.postLogin)
 
 
 // router.get('/profile', profileController.getIndex)
-router.get('/profile', personsController.getPersons)
+router.get('/profile', ensureAuth, personsController.getPersons)
+
 // router.post('/profile', authController.postLogin)
 
 router.get('/logout', authController.logout)

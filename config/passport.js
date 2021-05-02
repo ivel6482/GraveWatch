@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const User = require('../models/User')
 
 module.exports = function (passport) {
-  console.log('calling passport')
   passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
     User.findOne({ email: email.toLowerCase() }, (err, user) => {
       if (err) { return done(err) }
@@ -26,12 +25,10 @@ module.exports = function (passport) {
   
 
   passport.serializeUser((user, done) => {
-    console.log('serializing user')
     done(null, user.id)
   })
 
   passport.deserializeUser((id, done) => {
-    console.log('deserializing user')
     User.findById(id, (err, user) => done(err, user))
   })
 }

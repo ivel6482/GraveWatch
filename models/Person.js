@@ -8,7 +8,7 @@ const PersonSchema = new mongoose.Schema({
   picture: {
     type: String,
     // default: '/uploads/placeholder.png', // example
-    required: true,
+    // required: true,
   },
   description: {
     type: String,
@@ -22,9 +22,11 @@ const PersonSchema = new mongoose.Schema({
   },
   hairColor: {
     type: String,
+		default: 'Unknown',
   },
   lastSeenDate: {
     type: Date,
+		default: 'Unknown',
   },
   lat: {
     type: String,
@@ -40,27 +42,36 @@ const PersonSchema = new mongoose.Schema({
   },
   height: {
     type: String,
+		default: 'Unknown',
   },
   dateOfBirth: {
     type: Date,
+		default: 'Unknown',
   },
   eyeColor: {
     type: String,
+		default: 'Unknown',
   },
   placeOfBirth: {
     type: String,
+		default: 'Unknown',
   },
   weight: {
     type: String,
+		default: 'Unknown',
   },
   race: {
     type: String,
+		default: 'Unknown',
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-    createdAt: {
+  cloudinaryId: {
+    type: String,
+  },
+	createdAt: {
     type: Date,
     default: Date.now,
   },

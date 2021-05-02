@@ -1,7 +1,12 @@
 <%- include('partials/header') -%>
 <ul>
-  <li><a href="/login">Login</a></li>
-  <li><a href="/signup">Sign Up</a></li>
+<% if(user) { %>
+	<li><a href="/profile">Profile</a></li>
+	<li><a href="/logout">Logout</a></li>
+<% } else { %>
+		<li><a href="/login">Login</a></li>
+		<li><a href="/signup">Sign Up</a></li>
+<% } %>
 </ul>
 <div>
   <h2>Current Missing/Kidnapped People</h2>
@@ -12,7 +17,7 @@
     <% persons.forEach(person => { %>
       <li>
         <a href="<%= `/persons/${person._id}` %>">
-          <img src="" alt="<%= `${person.name}` %>">
+          <img src="<%= person.picture %>" alt="<%= `${person.name}` %>" loading="lazy">
         </a>
         <p><a href="<%= `/persons/${person._id}` %>"><%= `${person.name}` %></a></p>
       </li>

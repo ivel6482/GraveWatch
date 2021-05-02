@@ -7,9 +7,9 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 //Post Routes - simplified for now
 
 
-router.get("/:id", ensureAuth, personsController.getPersonById); // /persons/:id
+router.get("/:id", personsController.getPersonById); // /persons/:id
 
-router.post("/createPerson",  personsController.createPerson); // this is what is attaching from route/persons/createPerson
+router.post("/createPerson", upload.single('file'), personsController.createPerson); // this is what is attaching from route/persons/createPerson
 
 router.get('/', personsController.getAllPersons)
 
