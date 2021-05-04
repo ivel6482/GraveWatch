@@ -1,0 +1,159 @@
+/* Notification banner on profiles page showing errors */
+.notification {
+	position: fixed;
+	z-index: 2;
+	top: 2rem;
+	left: 50%;
+	transition: 0.1s ease-in-out;
+	transition-property: visibility, opacity, transform;
+}
+.notification {
+	visibility: hidden;
+	opacity: 0;
+	transform: translate(-50%, -100%);
+}
+.notification.show {
+	visibility: visible;
+	opacity: 1;
+	transform: translate(-50%, 0%);
+}
+/*Header.ejs*/
+body {
+  background-color: #e0e0e0;
+  font-family: 'Roboto', sans-serif;
+}
+header {
+  display: flex;
+  justify-content: space-between
+}
+header ul {
+  font-size: 25px;
+  display: flex;
+}
+h1 {
+  font-weight: bold;
+  font-size: 3rem;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style-type: none;
+}
+/*Footer.ejs*/
+footer {
+	clear: both;
+}
+/*Index.ejs*/
+.container {
+  margin: 0 10% 0 10%;
+}
+title h2 {
+  font-size: 40px;
+  line-height: 40px;
+  margin-bottom: 5px;
+}
+.missingPersons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.missingPersons ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+.missingPersons img {
+  width: 18rem;
+  object-fit: fill;
+  height: 20rem;
+  padding: 15px
+}
+.missingPersons p {
+  text-align: center;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.missingPersons a {
+  color: #36619B;
+  text-decoration: none;
+}
+/*Signup.ejs*/
+.accountContainer {
+  font-weight: bold;
+	display: block;
+	margin: 0 auto;
+	max-width: max-content;
+  border-radius: 20px;
+  border: 2px solid white;
+  padding: 2%;
+}
+.accountContainer h2 {
+  text-align: center;
+  font-size: 40px;
+}
+.accountContainer form {
+  display: flex;
+  flex-direction: column;
+}
+.accountContainer label {
+  padding: 2%;
+}
+.accountContainer input {
+  width: 100%;
+}
+.accountContainer button {
+  height: 30px;
+  width: 80px;
+  margin: 2%;
+  background: #40a0d7;
+  color: white;
+}
+.accountContainer p {
+  padding: 2%;
+}
+/*Login.ejs*/
+
+/*Profile.ejs*/
+.containersection {
+  display: flex;
+  justify-content: center;
+
+}
+.userinfosection {
+    display: flex;
+  justify-content: center;
+}
+
+/*Person.ejs*/
+*{
+    box-sizing: border-box;
+    outline: 1px solid black;
+
+
+}
+
+.smallerimges{
+
+    width:100%;
+}
+article{
+
+    width: 50%;
+    float: left;
+}
+.split1{
+    
+    width: 50%;
+}
+.split2{
+  
+    width: 50%;
+}
+
+/*Footer.ejs*/
+footer {
+  text-align: center;
+}

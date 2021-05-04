@@ -7,7 +7,9 @@ exports.getLogin = (req, res) => {
     return res.redirect('/profile')
   }
   res.render('login',{
-    title: 'Login'
+    title: 'Login',
+		user: null,
+		leaflet: false,
   })
 }
 
@@ -61,7 +63,9 @@ exports.getSignup = (req, res) => {
     return res.redirect('/profile')
   }
   res.render('signup', {
-    title: 'Create an Account'
+    title: 'Create an Account',
+		user: null,
+		leaflet: false,
   })
 }
 

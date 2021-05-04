@@ -1,17 +1,12 @@
 <%- include('partials/header') -%>
-
-<ul>
-<% if(user) { %>
-	<li><a href="/profile">Profile</a></li>
-	<li><a href="/logout">Logout</a></li>
-<% } else { %>
-	<li><a href="/login">Login</a></li>
-	<li><a href="/signup">Sign Up</a></li>
+<!-- need to decide where this goes -->
+<% if(user && user.id == person.user.id) { %>
+	<a href="<%= `/persons/updatePerson/${person.id}` %>">Update</a>
+	<button class='del' data-id="<%= person.id %>">Delete</button>
 <% } %>
-</ul>
-<section class=''>
-<p>this is person.ejs</p>
 
+
+<section class=''>
     <section class="mainsectiontop">
         <article class="leftsection">
             <section class="submission">
@@ -34,7 +29,7 @@
             <div id='mymap' style="height: 300px;"></div>
             <section class="mapimage">map image</section>
             <section>
-                <span class="Date">Date: <%= person.lastSeenDate && new Intl.DateTimeFormat('en', {dateStyle: 'full'}).format(person.lastSeenDate) %> </span>
+                <span class="Date">Last seen date: <%= person.lastSeenDate && new Intl.DateTimeFormat('en', {dateStyle: 'full'}).format(person.lastSeenDate) %> </span>
                 <span class="Location">Location:</span>
             </section>
         </article>
@@ -49,8 +44,8 @@
                 <p class="race">Race: <%= person.race %> </p>
             </section>
             <section class="rightsection">
-                <p class="birthplace">Birth Place: <%= person.birthplace %></p>
-                <p class="eyes">Eye Color: <%= person.eyes %> </p>
+                <p class="birthplace">Birth Place: <%= person.placeOfBirth %></p>
+                <p class="eyes">Eye Color: <%= person.eyeColor %> </p>
                 <p class="weight">Weight: <%= person.weight %> </p>
                 <p class="sex">Sex: <%= person.sex %> </p>
             </section>
@@ -64,6 +59,7 @@
   /* Define a marker using person lon and lat */
   var marker = new L.Marker([<%= person.lat %>, <%= person.lon %>]).addTo(map);
   marker.bindPopup("Last seen location of <%= person.name %>").openPopup();
+  map.setView(marker.getLatLng(), 12);
 </script>
 
 
