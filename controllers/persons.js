@@ -10,7 +10,7 @@ module.exports = {
       //Find function without any argument will return all
       //the records from the 'Person' collection.
       const PersonAllItems = await Person.find()
-      res.render('index.ejs', {persons: PersonAllItems, user: req.user})
+      res.render('index.ejs', {persons: PersonAllItems, user: req.user, leaflet: false})
     }catch(err){
       console.log(err)
     }
@@ -20,7 +20,7 @@ module.exports = {
     console.log(req.user)
     try {
       const PersonItems = await Person.find({user: req.user._id})
-      res.render('profile.ejs', {persons: PersonItems, user: req.user})
+      res.render('profile.ejs', {persons: PersonItems, user: req.user, leaflet: true})
     }catch(err){
       console.log(err)
     }
@@ -50,7 +50,6 @@ module.exports = {
         user: req.user
       })
       res.redirect(`/persons/${person._id}`)
-
     }catch(err){
       console.log(err)
     }
@@ -58,22 +57,53 @@ module.exports = {
   
   getPersonById: async (req, res) => {
     const { id } = req.params 
+    // const { id } = req.body
     try {
       const person = await Person.findById(id).populate('user')
-      res.render('person.ejs', { person: person, user: req.user })
+      res.render('person.ejs', { person: person, user: req.user, leaflet: true })
     } catch(e) {
       console.error(e)
     }
+
   },
 
-  deletePerson: async (req, res) => {
-    try {
-      await Person.remove({_id: req.params.id})
-      console.log('Removed person')
-      res.redirect('/profile')
+  getUpdate: async(req, res) => {
+		console.log('get to getUpdate')
+    const { id } = req.params
+    try{
+      const person = await Person.findById(id).populate('user')
+      res.render('update.ejs', { person, user: req.user, leaflet: true })
+    }catch(e){
+      console.error(e)
     }
-    catch(err) {
-      res.redirect('/profile')
-    }
-  }
+  },
+    
+	putPerson: async (req, res) => {
+		try {
+      // get the person that we want to update data
+      // fill the form with that data
+      // use the data from form to update that person
+      // redirect to /persons/:id
+			const person = await Person.findOneAndUpdate({ _id: req.params.id }, req.body)
+			res.redirect(`/persons/${person._id}`)
+		} catch (err) {
+			console.log(err)
+		}
+	},
+
+	deletePerson: async (req, res) => {
+		try {
+			const person = await Person.findById({ _id: req.params.id })
+      await cloudinary.uploader.destroy(person.cloudinaryId)
+      await Person.remove({ _id: req.params.id })
+			console.log('Removed person')
+			res.redirect('/profile')
+		} catch (err) {
+			console.log(err)
+			res.redirect('/profile')
+		}
+	},
+
 }
+
+
