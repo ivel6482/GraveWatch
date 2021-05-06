@@ -1,40 +1,48 @@
 <%- include('partials/header') -%>
-
-<p>UserName: <%= `${user.name}`%></p>
-<p>Email: <%= `${user.email}`%></p>
-<div id='mymap' style="height: 200px;"></div>
-<h2>Update missing persons report</h2>
-<form action="/persons/createPerson" method="POST" enctype="multipart/form-data" class="update-form">
-  <label>Name: <input type='text' placeholder='Enter a name' name='name' value="<%= person.name %>"></label><br>
-  <label>Description: <textarea placeholder='Description' name='description'><%= person.description %></textarea></label><br>
-  <label>Status: <select name="status" value="<%= person.status %>">
-  	<option value="missing">Missing</option>
-  	<option value="found">Found</option>
-  	<option value="deceased">Deceased</option>
-  	<option value="kidnapped">Kidnapped</option>
-	</select></label><br>
-  <label>Hair color: <input type='text' placeholder='Hair Color' name='hairColor' value="<%= person.hairColor %>"></label><br>
-  <label>Last seen: <input type='date' name='lastSeenDate' value="<%= person.lastSeenDate && person.lastSeenDate.toISOString().slice(0, 10) %>"></label><br>
-  <label>Sex: <select name="sex" value="<%= person.sex %>">
-  	<option value="male">Male</option>
-  	<option value="female">Female</option>
-	</select></label><br>
-  <label>Height: <input type='text' placeholder='Height' name='height' value="<%= person.height %>"></label><br>
-  <label>Date of birth: <input type='date' name='dateOfBirth' value="<%= person.dateOfBirth && person.dateOfBirth.toISOString().slice(0, 10) %>"></label><br>
-  <label>Eye color: <input type='text' placeholder='Eye color' name='eyeColor' value="<%= person.eyeColor %>"></label><br>
-  <label>Place of birth: <input type='text' placeholder='Place of birth' name='placeOfBirth' value="<%= person.placeOfBirth %>"></label><br>
-  <label>Weight: <input type='text' placeholder='Weight' name='weight' value="<%= person.weight %>"></label><br>
-	<label>Race: <input type='text' placeholder='Race' name='race' value="<%= person.race %>"></label><br>
-  <label>Image: <input type="file" name="file"></label><br>
-  <input type='hidden' name='lat' id='lat' value="<%= person.lat %>">
-  <input type='hidden' name='lon' id='lon' value="<%= person.lon %>">
-  <input type='hidden' name='id' id='id' value="<%= person.id %>">
-
-  <button class="update">Update</button>
-  <a href="/persons/<%= person.id %>">Cancel</a>
-</form>
-
-
+<section class="container">
+  <section class="updateContainer">
+  <p><span>UserName: </span><%= `${user.name}`%></p>
+  <p><span>Email: </span><%= `${user.email}`%></p>
+  <h2>Update Missing Persons Report</h2>
+  <form class="submissionform" action="/persons/createPerson" method="POST" enctype="multipart/form-data" class="update-form">
+    <div class="form">
+      <label><span>Name: </span><input type='text' placeholder='Enter a name' name='name' value="<%= person.name %>"></label><br>
+      <label><span>Status: </span><select name="status" value="<%= person.status %>">
+        <option value="missing">Missing</option>
+        <option value="found">Found</option>
+        <option value="deceased">Deceased</option>
+        <option value="kidnapped">Kidnapped</option>
+      </select></label>
+      <label><span>Hair color: </span><input type='text' placeholder='Hair Color' name='hairColor' value="<%= person.hairColor %>"></label><br>
+      <label><span>Last seen: </span><input type='date' name='lastSeenDate' value="<%= person.lastSeenDate && person.lastSeenDate.toISOString().slice(0, 10) %>"></label><br>
+      <label><span>Sex: </span><select name="sex" value="<%= person.sex %>">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        </select></label>
+      <label><span>Height: </span><input type='text' placeholder='Height' name='height' value="<%= person.height %>"></label><br>
+      </div>
+      <div class="form">
+      <label><span>Date of birth: </span><input type='date' name='dateOfBirth' value="<%= person.dateOfBirth && person.dateOfBirth.toISOString().slice(0, 10) %>"></label><br>
+      <label><span>Eye color: </span><input type='text' placeholder='Eye color' name='eyeColor' value="<%= person.eyeColor %>"></label><br>
+      <label><span>Place of birth: </span><input type='text' placeholder='Place of birth' name='placeOfBirth' value="<%= person.placeOfBirth %>"></label><br>
+      <label><span>Weight: </span><input type='text' placeholder='Weight' name='weight' value="<%= person.weight %>"></label><br>
+      <label><span>Race: </span><input type='text' placeholder='Race' name='race' value="<%= person.race %>"></label><br>
+      <label><span>Image: </span><input type="file" name="file"></label>
+    </div>
+    <input type='hidden' name='lat' id='lat' value="<%= person.lat %>">
+    <input type='hidden' name='lon' id='lon' value="<%= person.lon %>">
+    <input type='hidden' name='id' id='id' value="<%= person.id %>">
+  </form>
+  <div id='mymap' class="mymap" style="height: 430px;"></div>
+  <div class="description">
+    <h2><span>Description:</span></h2><textarea placeholder='Description' name='description'></textarea>
+  </div>
+  </section>
+  <div class="upCan">
+    <button class="update">Update</button>
+    <a class="update" href="/persons/<%= person.id %>">Cancel</a>
+  </div>
+</section>
 <script src="/js/leaflet.js"></script>
 <script>
     var marker;
@@ -43,12 +51,9 @@
     if (marker) {
       map.removeLayer(marker);
     }
-
     marker = new L.marker(e.latlng, {draggable:'true'}).addTo(map);
-    
     var position = marker.getLatLng();
     const UserLocation = {lat: position.lat, lng: position.lng};
-    
     marker.on('dragend', function(event){
       var marker = event.target;
       var position = marker.getLatLng();
@@ -60,14 +65,13 @@
     document.getElementById('lat').value = e.latlng.lat;
     document.getElementById('lon').value = e.latlng.lng;
   };
-
   map.on('click', onMapClick);
 </script>
 <script>
-
   /* Define a marker using person lon and lat */
   var marker = new L.Marker([<%= person.lat %>, <%= person.lon %>]).addTo(map);
   marker.bindPopup("Last seen location of <%= person.name %>").openPopup();
+  map.setView(marker.getLatLng(), 12);
 </script>
 <script>
   function createValidTimeFormat(timestring) {
