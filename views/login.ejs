@@ -1,12 +1,23 @@
 <%- include('partials/header') -%>
-<h2>Login to your GraveWatch Account</h2>
-    <form method="post" action="/login">
-        <label>Email Account: <input type="email" name="email"></label>
-        <label>Password: <input type="password" name="password"></label>
-        <button type="submit">Submit</button>
-    </form>
-    <div>
-        <p>Don't have a GraveWatch account?</p>
-        <p>Sign up <a href="../signup">here</a></p>
-    </div>
+<section class="accountContainer">
+<h2>Login to your Account</h2>
+    <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach( el => { %>
+            <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+    <% } %>
+    <% if (locals.messages.info) { %>
+        <% messages.info.forEach( el => { %>
+            <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+    <% } %>
+<form method="POST" action="/login">
+  <label>Email: <input type="email" name="email"></label>
+  <label>Password: <input type="password" name="password"></label>
+  <button type="submit">Submit</button>
+</form>
+<div>
+    <p>Don't have an account? Sign up <a href="/signup">here</a></p>
+</div>
+</section>
 <%- include('partials/footer') -%>

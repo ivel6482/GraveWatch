@@ -1,9 +1,66 @@
 <%- include('partials/header') -%>
+<!-- need to decide where this goes -->
+<% if(user && user.id == person.user.id) { %>
+	<a href="<%= `/persons/updatePerson/${person.id}` %>">Update</a>
+	<button class='del' data-id="<%= person.id %>">Delete</button>
+<% } %>
 
-    /*
-    TODO:
-    display person details
-    if signed in and created person, show delete/update option(s)
-    */
+
+<section class=''>
+    <section class="mainsectiontop">
+        <article class="leftsection">
+            <section class="submission">
+                <img src="<%= person.picture %>" alt="<%= person.name %>">
+                <p class="name">Name: <%= person.name %></p>
+                <p class="submittedby">Submitted By: <%= person.user.name %></p>
+                <p class="datesubmitted">Date Submitted: <%= new Intl.DateTimeFormat('en', {dateStyle: 'full', timeStyle: 'short'}).format(person.createdAt) %></p>
+                <p class="status">Status: <%= person.status %></p>
+            </section>
+            <section class="bigimage">this is big image</section>
+            <section class="smallerimges">
+                <span>img1</span>
+                <span>img2</span>
+                <span>img3</span>
+                <span>img4</span>
+            </section>
+        </article>
+        <article class="rightsection">
+            <h2>Last Seen</h2>
+            <div id='mymap' style="height: 300px;"></div>
+            <section class="mapimage">map image</section>
+            <section>
+                <span class="Date">Last seen date: <%= person.lastSeenDate && new Intl.DateTimeFormat('en', {dateStyle: 'full'}).format(person.lastSeenDate) %> </span>
+                <span class="Location">Location:</span>
+            </section>
+        </article>
+    </section>
+    <h2>Information</h2>
+    <section class="mainsectionbottom">
+            <section class="leftsection">
+                <p class="">Description: <%= person.description %></p>
+                <p class="DOB">Date Of Birth: <%= person.dateOfBirth && new Intl.DateTimeFormat('en', {dateStyle: 'long'}).format(person.dateOfBirth)  %></p>
+                <p class="hair">Hair Color: <%= person.hairColor %></p>
+                <p class="height">Height: <%= person.height %></p>
+                <p class="race">Race: <%= person.race %> </p>
+            </section>
+            <section class="rightsection">
+                <p class="birthplace">Birth Place: <%= person.placeOfBirth %></p>
+                <p class="eyes">Eye Color: <%= person.eyeColor %> </p>
+                <p class="weight">Weight: <%= person.weight %> </p>
+                <p class="sex">Sex: <%= person.sex %> </p>
+            </section>
+        </section>
+    </section>
+
+<!-- Load leaflet.js -->
+<script src="../js/leaflet.js"></script>
+<script>
+
+  /* Define a marker using person lon and lat */
+  var marker = new L.Marker([<%= person.lat %>, <%= person.lon %>]).addTo(map);
+  marker.bindPopup("Last seen location of <%= person.name %>").openPopup();
+  map.setView(marker.getLatLng(), 12);
+</script>
+
 
 <%- include('partials/footer') -%>

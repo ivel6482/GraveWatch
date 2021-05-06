@@ -4,14 +4,17 @@ const upload = require("../middleware/multer"); // ????
 const personsController = require("../controllers/persons");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
-//Post Routes - simplified for now
 
-router.get("/:id", ensureAuth, personsController.getPersonById);
+router.get('/', personsController.getAllPersons)
 
-router.post("/createPerson", personsController.createPerson);
+router.post("/createPerson", ensureAuth, upload.single('file'), personsController.createPerson); // this is what is attaching from route/persons/createPerson
 
-// router.put("/:id", personsController.updatePerson) TODO later
+router.get("/:id", personsController.getPersonById); // /persons/:id
+router.put("/:id", personsController.getPersonById); // /persons/:id
 
-router.delete("/deletePerson/:id", personsController.deletePerson);
+router.get("/updatePerson/:id", ensureAuth, personsController.getUpdate)
+router.put("/updatePerson/:id", ensureAuth, personsController.putPerson)
 
-module.exports = router;
+router.delete("/deletePerson/:id", ensureAuth, personsController.deletePerson);//this is dynaic :id is a place holder
+
+module.exports = router; 
