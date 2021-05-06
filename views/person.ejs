@@ -1,70 +1,61 @@
 <%- include('partials/header') -%>
-
-<ul>
-<% if(user) { %>
-	<li><a href="/profile">Profile</a></li>
-	<li><a href="/logout">Logout</a></li>
-<% } else { %>
-	<li><a href="/login">Login</a></li>
-	<li><a href="/signup">Sign Up</a></li>
-<% } %>
-</ul>
-<section class=''>
-<p>this is person.ejs</p>
-
-    <section class="mainsectiontop">
+<div class='container'>
+  <% if(user && user.id == person.user.id) { %>
+	<a class="update" href="<%= `/persons/updatePerson/${person.id}` %>">Update</a>
+	<button class='del update' data-id="<%= person.id %>">Delete</button>
+  <% } %>
+  <div class="mainsectiontop">
         <article class="leftsection">
-            <section class="submission">
-                <img src="<%= person.picture %>" alt="<%= person.name %>">
-                <p class="name">Name: <%= person.name %></p>
-                <p class="submittedby">Submitted By: <%= person.user.name %></p>
-                <p class="datesubmitted">Date Submitted: <%= new Intl.DateTimeFormat('en', {dateStyle: 'full', timeStyle: 'short'}).format(person.createdAt) %></p>
-                <p class="status">Status: <%= person.status %></p>
+            <section id="submission">
+                <p class="name"><span>Name: </span><%= person.name %></p>
+                <p class="submittedby"><span>Submitted By: </span><%= person.user.name %></p>
+                <p class="datesubmitted"><span>Date Submitted: </span><%= new Intl.DateTimeFormat('en', {dateStyle: 'full', timeStyle: 'short'}).format(person.createdAt) %></p>
+                <p class="status"><span>Status: </span><%= person.status %></p>
+            <section class="bigimage">                       <img src="<%= person.picture %>" alt="<%= person.name %>">
             </section>
-            <section class="bigimage">this is big image</section>
-            <section class="smallerimges">
-                <span>img1</span>
-                <span>img2</span>
-                <span>img3</span>
-                <span>img4</span>
             </section>
         </article>
         <article class="rightsection">
-            <h2>Last Seen</h2>
-            <div id='mymap' style="height: 300px;"></div>
-            <section class="mapimage">map image</section>
+            <h2><span>Last Seen:</span></h2>
+            <div id='mymap' class="lastSeenMap" style="height: 430px;"></div>
+            <section class="mapimage"></section>
             <section>
-                <span class="Date">Date: <%= person.lastSeenDate && new Intl.DateTimeFormat('en', {dateStyle: 'full'}).format(person.lastSeenDate) %> </span>
+                <span class="Date">Last seen date: <%= person.lastSeenDate && new Intl.DateTimeFormat('en', {dateStyle: 'full'}).format(person.lastSeenDate) %> </span>
                 <span class="Location">Location:</span>
             </section>
         </article>
-    </section>
-    <h2>Information</h2>
-    <section class="mainsectionbottom">
-            <section class="leftsection">
-                <p class="">Description: <%= person.description %></p>
-                <p class="DOB">Date Of Birth: <%= person.dateOfBirth && new Intl.DateTimeFormat('en', {dateStyle: 'long'}).format(person.dateOfBirth)  %></p>
-                <p class="hair">Hair Color: <%= person.hairColor %></p>
-                <p class="height">Height: <%= person.height %></p>
-                <p class="race">Race: <%= person.race %> </p>
+  </div>
+  <section class="mainsectionbottom">
+       <h2><span>Information</span></h2>
+       <section class="infoWrapper">
+            <section>
+                <p class="DOB"><span>Date Of Birth: </span><%= person.dateOfBirth && new Intl.DateTimeFormat('en', {dateStyle: 'long'}).format(person.dateOfBirth)  %></p>
+                <p class="hair"><span>Hair Color: </span><%= person.hairColor %></p>
+                <p class="height"><span>Height: </span><%= person.height %></p>
+                <p class="race"><span>Race: </span><%= person.race %> </p>
             </section>
-            <section class="rightsection">
-                <p class="birthplace">Birth Place: <%= person.birthplace %></p>
-                <p class="eyes">Eye Color: <%= person.eyes %> </p>
-                <p class="weight">Weight: <%= person.weight %> </p>
-                <p class="sex">Sex: <%= person.sex %> </p>
+            <section>
+                <p class="birthplace"><span>Birth Place: </span><%= person.placeOfBirth %></p>
+                <p class="eyes"><span>Eye Color: </span><%= person.eyeColor %> </p>
+                <p class="weight"><span>Weight: </span><%= person.weight %> </p>
+                <p class="sex"><span>Sex: </span><%= person.sex %> </p>
+            </section>
             </section>
         </section>
-    </section>
-
+        <section class="description">
+            <h2><span>Description</span></h2>
+            <p class=""><%= person.description %></p>
+        </section>
+        <h4>Submit a Tip:</h4>
+        <p>If you have any information concerning this person, please contact <a href="mailto:infotip@searching4u.com">infotip@searching4u.com</a></p>
+  </section>
+</div>
 <!-- Load leaflet.js -->
 <script src="../js/leaflet.js"></script>
 <script>
-
   /* Define a marker using person lon and lat */
   var marker = new L.Marker([<%= person.lat %>, <%= person.lon %>]).addTo(map);
   marker.bindPopup("Last seen location of <%= person.name %>").openPopup();
+  map.setView(marker.getLatLng(), 12);
 </script>
-
-
 <%- include('partials/footer') -%>

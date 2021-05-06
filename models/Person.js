@@ -8,7 +8,7 @@ const PersonSchema = new mongoose.Schema({
   picture: {
     type: String,
     // default: '/uploads/placeholder.png', // example
-    // required: true,
+    required: true,
   },
   description: {
     type: String,
