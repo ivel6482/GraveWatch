@@ -54,8 +54,6 @@ app.use(flash())
 app.use('/', mainRoutes)
 app.use('/persons', personRoutes)//this is attaching to the route, in persons.js
 
-
-
-const PORT = process.env.PORT 
-
-app.listen(PORT, () => console.log(`Server running in port ${PORT}`))
+app.listen(process.env.PORT, () => {
+  console.log("Server is running, you better catch it!");
+});
