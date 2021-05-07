@@ -29,13 +29,13 @@
       <label><span>Race: </span><input type='text' placeholder='Race' name='race' value="<%= person.race %>"></label><br>
       <label><span>Image: </span><input type="file" name="file"></label>
     </div>
+    <input type='hidden' name='lat' id='lat' value="<%= person.lat %>">
+    <input type='hidden' name='lon' id='lon' value="<%= person.lon %>">
+    <input type='hidden' name='id' id='id' value="<%= person.id %>">
     <div class="upCan">
       <button class="update" type="button">Update</button>
       <a class="update" href="/persons/<%= person.id %>">Cancel</a>
     </div>
-    <input type='hidden' name='lat' id='lat' value="<%= person.lat %>">
-    <input type='hidden' name='lon' id='lon' value="<%= person.lon %>">
-    <input type='hidden' name='id' id='id' value="<%= person.id %>">
   </form>
   <div id='mymap' class="mymap" style="height: 430px;"></div>
   <div class="description">
