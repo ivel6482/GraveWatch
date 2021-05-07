@@ -5,24 +5,22 @@ const cloudinary = require('../middleware/cloudinary')
 module.exports = {
 
   getAllPersons: async (req, res)=>{
-    console.log(req.user)//to check if we have user
     try {
       //Find function without any argument will return all
       //the records from the 'Person' collection.
       const PersonAllItems = await Person.find()
       res.render('index.ejs', {persons: PersonAllItems, user: req.user, leaflet: false})
     }catch(err){
-      console.log(err)
+      console.error(err)
     }
   },
 
   getPersons: async (req, res)=>{//filtering records
-    console.log(req.user)
     try {
       const PersonItems = await Person.find({user: req.user._id})
       res.render('profile.ejs', {persons: PersonItems, user: req.user, leaflet: true})
     }catch(err){
-      console.log(err)
+      console.error(err)
     }
   },
 
@@ -35,28 +33,28 @@ module.exports = {
         // picture: req.body.file,
         picture: result.secure_url,
         description: req.body.description,
-        status: req.body.status, 
+        status: req.body.status,
         hairColor: req.body.hairColor,
-        lastSeenDate: req.body.lastSeenDate, 
-        lat: req.body.lat, 
+        lastSeenDate: req.body.lastSeenDate,
+        lat: req.body.lat,
         lon: req.body.lon,
-        sex: req.body.sex, 
-        height: req.body.height, 
+        sex: req.body.sex,
+        height: req.body.height,
         dateOfBirth: req.body.dateOfBirth,
         eyeColor: req.body.eyeColor,
         placeOfBirth: req.body.placeOfBirth,
-        weight: req.body.weight, 
-        race: req.body.race, 
+        weight: req.body.weight,
+        race: req.body.race,
         user: req.user
       })
       res.redirect(`/persons/${person._id}`)
     }catch(err){
-      console.log(err)
+      console.error(err)
     }
   },
-  
+
   getPersonById: async (req, res) => {
-    const { id } = req.params 
+    const { id } = req.params
     // const { id } = req.body
     try {
       const person = await Person.findById(id).populate('user')
@@ -68,7 +66,6 @@ module.exports = {
   },
 
   getUpdate: async(req, res) => {
-		console.log('get to getUpdate')
     const { id } = req.params
     try{
       const person = await Person.findById(id).populate('user')
@@ -77,7 +74,7 @@ module.exports = {
       console.error(e)
     }
   },
-    
+
 	putPerson: async (req, res) => {
 		try {
       // get the person that we want to update data
@@ -87,7 +84,7 @@ module.exports = {
 			const person = await Person.findOneAndUpdate({ _id: req.params.id }, req.body)
 			res.redirect(`/persons/${person._id}`)
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 		}
 	},
 
@@ -96,14 +93,11 @@ module.exports = {
 			const person = await Person.findById({ _id: req.params.id })
       await cloudinary.uploader.destroy(person.cloudinaryId)
       await Person.remove({ _id: req.params.id })
-			console.log('Removed person')
 			res.redirect('/profile')
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 			res.redirect('/profile')
 		}
 	},
 
 }
-
-
