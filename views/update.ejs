@@ -32,16 +32,16 @@
     <input type='hidden' name='lat' id='lat' value="<%= person.lat %>">
     <input type='hidden' name='lon' id='lon' value="<%= person.lon %>">
     <input type='hidden' name='id' id='id' value="<%= person.id %>">
+    <div class="upCan">
+    <button class="update" type="button">Update</button>
+    <a class="update" href="/persons/<%= person.id %>">Cancel</a>
+  </div>
   </form>
   <div id='mymap' class="mymap" style="height: 430px;"></div>
   <div class="description">
     <h2><span>Description:</span></h2><textarea placeholder='Description' name='description'></textarea>
   </div>
   </section>
-  <div class="upCan">
-    <button class="update">Update</button>
-    <a class="update" href="/persons/<%= person.id %>">Cancel</a>
-  </div>
 </section>
 <script src="/js/leaflet.js"></script>
 <script>
