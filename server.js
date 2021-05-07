@@ -1,5 +1,4 @@
 const express = require('express')
-const morgan = require('morgan')
 const app = express()
 const connectDB = require('./config/database')
 const passport = require('passport')
@@ -30,9 +29,9 @@ app.set('view engine', 'ejs')
 // Static folder for the public ejs
 app.use(express.static('public'));
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'))
-}
+//if (process.env.NODE_ENV === 'development') {
+//  app.use(morgan('dev'))
+//}
 
 
 // Setup Sessions - stored in MongoDB
@@ -54,8 +53,6 @@ app.use(flash())
 app.use('/', mainRoutes)
 app.use('/persons', personRoutes)//this is attaching to the route, in persons.js
 
-
-
-const PORT = process.env.PORT 
-
-app.listen(PORT, () => console.log(`Server running in port ${PORT}`))
+app.listen(process.env.PORT, () => {
+  console.log("Server is running, you better catch it!");
+});

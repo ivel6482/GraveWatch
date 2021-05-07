@@ -28,7 +28,7 @@ async function deletePerson(event){
 }
 
 
-const updateForm = document.querySelectorAll('form.update-form');
+const updateForm = document.querySelectorAll('form.submissionform');
 
 Array.from(updateForm).forEach((el) => {
   el.addEventListener('submit', updatePerson)
