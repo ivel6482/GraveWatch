@@ -3,7 +3,7 @@ module.exports = {
 		if (req.isAuthenticated()) {
 			return next()
 		} else {
-			res.redirect('/')
+			res.status(401).json({ message: 'Not authorized' })
 		}
 	},
 	ensureGuest: function (req, res, next) {
