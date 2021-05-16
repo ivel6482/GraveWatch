@@ -1,8 +1,95 @@
-const deleteBtn = document.querySelectorAll('.del')
+document.addEventListener('DOMContentLoaded', ()=> {
+	const submitForm = document.querySelector('#add-person-form');
+	const updateForm = document.querySelectorAll('form.update-person-form');
+	const deleteBtn = document.querySelectorAll('.del')
 
-Array.from(deleteBtn).forEach((el)=>{
-    el.addEventListener('click', deletePerson)
-})
+	if(submitForm) {
+		submitForm.addEventListener('submit', handleFormSubmit);
+	}
+
+	if(updateForm) {
+		Array.from(updateForm).forEach((el) => {
+			el.addEventListener('submit', updatePerson)
+		})
+	}
+
+	if(deleteBtn) {
+		Array.from(deleteBtn).forEach((el)=>{
+			el.addEventListener('click', deletePerson)
+		})
+	}
+});
+
+
+// Show a notification if required fields haven't been filled
+function handleFormSubmit(event) {
+	const required = ['name', 'description', 'lat', 'lon', 'file'];
+	const inputs = event.target.querySelectorAll('input[name], textarea[name]');
+	const errors = [];
+
+	for(const input of inputs) {
+		const isRequired = required.includes(input.name);
+		const isEmpty = input.value === '';
+
+		if(isRequired && isEmpty) {
+			errors.push(input.name);
+		}
+	};
+
+	if(errors.length > 0) {
+		event.preventDefault(); // Prevent form from submitting
+		if(errors.includes('lat') || errors.includes('lon')) {
+			notify(`Error, please select a location on the map`);
+		}
+		else {
+			// Image is called 'file' so we need to replace it
+			const fileIndex = errors.indexOf('file');
+			if(fileIndex !== -1) {
+				errors[fileIndex] = 'image';
+			}
+
+			notify(`Error, the following fields cannot be empty: ${errors.join(', ')}`);
+		}
+	}
+};
+
+function notify(text) {
+	const notification = document.querySelector('.notification');
+
+	notification.textContent = text;
+	notification.classList.add('show');
+	setTimeout(() => {
+		notification.classList.remove('show');
+	}, 5000, notification);
+}
+
+
+// Update submitted persons
+async function updatePerson(event) {
+	event.preventDefault(); // Prevent post request
+
+	const fields = Array.from(event.target.querySelectorAll('input[name], textarea[name], select[name]'));
+	const personIndex = fields.findIndex(field => field.name === 'id');
+  const personId = fields.splice(personIndex, 1)[0].value;
+	const requestBody = Object.fromEntries(fields.map(field => {
+		return [field.name, field.value]
+	}))
+
+	try {
+    const response = await fetch(`/persons/updatePerson/${personId}`, {
+      method: 'put',
+      headers: { 'Content-type': 'application/json'},
+      body: JSON.stringify(requestBody),
+    })
+    location.replace(`/persons/${personId}`);
+  }
+  catch (err) {
+    console.error(err)
+  }
+}
+
+
+// Delete submitted persons
 /*/deletePerson/:id */
 async function deletePerson(event){
     const person = event.currentTarget.closest('[data-id]');
@@ -23,97 +110,6 @@ async function deletePerson(event){
 					location.reload();
 				}
     }catch(err){
-        console.log(err)
+        console.error(err)
     }
 }
-
-
-const updateForm = document.querySelectorAll('form.submissionform');
-
-Array.from(updateForm).forEach((el) => {
-  el.addEventListener('submit', updatePerson)
-})
-
-async function updatePerson(event) {
-	event.preventDefault(); // Prevent post request
-
-	const fields = Array.from(event.target.querySelectorAll('input, textarea, select'));
-	const personIndex = fields.findIndex(field => {field.name === 'id'});
-  const personId = fields.splice(personIndex, 1)[0].value;
-	const requestBody = Object.fromEntries(fields.map(field => {
-		return [field.name, field.value]
-	}))
-
-	try {
-    const response = await fetch(`/persons/updatePerson/${personId}`, {
-      method: 'put',
-      headers: { 'Content-type': 'application/json'},
-      body: JSON.stringify(requestBody),
-    })
-		// console.log(response)
-    location.replace(`/persons/${personId}`);
-  }
-  catch (err) {
-    console.log(err)
-  }
-}
-
-
-// const updateBtn = document.querySelectorAll('.update')
-
-// Array.from(updateBtn).forEach((el) => {
-//     el.addEventListener('click', updatePerson)
-// })
-
-// async function updatePerson(event) {
-// 	console.log(event)
-//   // loop through them
-//   const personId = document.querySelector('[name="id"]').value
-//   const name = document.querySelector('[name="name"]').value
-//   const description = document.querySelector('[name="description"]').value
-//   const status = document.querySelector('[name="status"]').value
-//   const hairColor = document.querySelector('[name="hairColor"]').value
-//   const lastSeenDate = document.querySelector('[name="lastSeenDate"]').value
-//   const sex = document.querySelector('[name="sex"]').value
-//   const height = document.querySelector('[name="height"]').value
-//   const dateOfBirth = document.querySelector('[name="dateOfBirth"]').value
-//   const eyeColor = document.querySelector('[name="eyeColor"]').value
-//   const placeOfBirth = document.querySelector('[name="placeOfBirth"]').value
-//   const race = document.querySelector('[name="race"]').value
-//   const picture = document.querySelector('[name="file"]').value
-//   const lat = document.querySelector('[name="lat"]').value
-//   const lon = document.querySelector('[name="lon"]').value
-//   const id = document.querySelector('[name="id"]').value
-
-// 	const fields = {
-// 		name,
-// 		description,
-// 		status,
-// 		hairColor,
-// 		lastSeenDate,
-// 		sex,
-// 		height,
-// 		dateOfBirth,
-// 		eyeColor,
-// 		placeOfBirth,
-// 		race,
-// 		lat,
-// 		lon,
-//     id,
-// 		picture,
-//   }
-
-//   try {
-//     const response = await fetch(`/persons/updatePerson/${personId}/`, {
-//       method: 'put',
-//       header: { 'Content-type': 'application/json'},
-//       body: JSON.stringify(fields)
-//     })
-//     const data = await response.json()
-//     console.log(data)
-//     location.replace(`/persons/${personId}`);
-//   }
-//   catch (err) {
-//     console.log(err)
-//   }
-// }

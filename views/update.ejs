@@ -1,47 +1,50 @@
 <%- include('partials/header') -%>
 <section class="container">
   <section class="updateContainer">
-  <p><span>UserName: </span><%= `${user.name}`%></p>
-  <p><span>Email: </span><%= `${user.email}`%></p>
-  <h2>Update Missing Persons Report</h2>
-  <form class="submissionform" action="/persons/createPerson" method="POST" enctype="multipart/form-data">
-    <div class="form">
-      <label><span>Name: </span><input type='text' placeholder='Enter a name' name='name' value="<%= person.name %>"></label><br>
-      <label><span>Status: </span><select name="status" value="<%= person.status %>">
-        <option value="missing">Missing</option>
-        <option value="found">Found</option>
-        <option value="deceased">Deceased</option>
-        <option value="kidnapped">Kidnapped</option>
-      </select></label>
-      <label><span>Hair color: </span><input type='text' placeholder='Hair Color' name='hairColor' value="<%= person.hairColor %>"></label><br>
-      <label><span>Last seen: </span><input type='date' name='lastSeenDate' value="<%= person.lastSeenDate && person.lastSeenDate.toISOString().slice(0, 10) %>"></label><br>
-      <label><span>Sex: </span><select name="sex" value="<%= person.sex %>">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        </select></label>
-      <label><span>Height: </span><input type='text' placeholder='Height' name='height' value="<%= person.height %>"></label><br>
-      </div>
-      <div class="form">
-      <label><span>Date of birth: </span><input type='date' name='dateOfBirth' value="<%= person.dateOfBirth && person.dateOfBirth.toISOString().slice(0, 10) %>"></label><br>
-      <label><span>Eye color: </span><input type='text' placeholder='Eye color' name='eyeColor' value="<%= person.eyeColor %>"></label><br>
-      <label><span>Place of birth: </span><input type='text' placeholder='Place of birth' name='placeOfBirth' value="<%= person.placeOfBirth %>"></label><br>
-      <label><span>Weight: </span><input type='text' placeholder='Weight' name='weight' value="<%= person.weight %>"></label><br>
-      <label><span>Race: </span><input type='text' placeholder='Race' name='race' value="<%= person.race %>"></label><br>
-      <label><span>Image: </span><input type="file" name="file"></label>
-    </div>
-    <input type='hidden' name='lat' id='lat' value="<%= person.lat %>">
-    <input type='hidden' name='lon' id='lon' value="<%= person.lon %>">
-    <input type='hidden' name='id' id='id' value="<%= person.id %>">
-    <div class="upCan">
-      <button class="update" type="button">Update</button>
-      <a class="update" href="/persons/<%= person.id %>">Cancel</a>
-    </div>
-  </form>
-  <div id='mymap' class="mymap" style="height: 430px;"></div>
-  <div class="description">
-    <h2><span>Description:</span></h2><textarea placeholder='Description' name='description'></textarea>
-  </div>
-  </section>
+		<p><span>UserName: </span><%= `${user.name}`%></p>
+		<p><span>Email: </span><%= `${user.email}`%></p>
+		<h2>Update Missing Persons Report</h2>
+		<form class="submissionform update-person-form" action="/persons/createPerson" method="POST" enctype="multipart/form-data">
+			<div class="form">
+				<label><span>Name: </span><input type='text' placeholder='Enter a name' name='name' value="<%= person.name %>"></label>
+				<label><span>Status: </span><select name="status">
+					<option value="missing" <%= person.status === 'missing' && 'selected' %>>Missing</option>
+					<option value="found" <%= person.status === 'found' && 'selected' %>>Found</option>
+					<option value="deceased" <%= person.status === 'deceased' && 'selected' %>>Deceased</option>
+					<option value="kidnapped" <%= person.status === 'kidnapped' && 'selected' %>>Kidnapped</option>
+				</select></label>
+				<label><span>Hair color: </span><input type='text' placeholder='Hair Color' name='hairColor' value="<%= person.hairColor %>"></label>
+				<label><span>Last seen: </span><input type='date' name='lastSeenDate' value="<%= person.lastSeenDate && person.lastSeenDate.toISOString().slice(0, 10) %>"></label>
+				<label><span>Sex: </span><select name="sex">
+					<option value="male" <%= person.sex === 'male' && 'selected' %>>Male</option>
+					<option value="female" <%= person.sex === 'female' && 'selected' %>>Female</option>
+					<option value="transfeminine" <%= person.sex === 'transfeminine' && 'selected' %>>Transfeminine</option>
+					<option value="transmasculine" <%= person.sex === 'transmasculine' && 'selected' %>>Transmasculine</option>
+					<option value="other" <%= person.sex === 'other' && 'selected' %>>Other</option>
+					</select></label>
+				<label><span>Height: </span><input type='text' placeholder='Height' name='height' value="<%= person.height %>"></label>
+			</div>
+			<div class="form">
+				<label><span>Date of birth: </span><input type='date' name='dateOfBirth' value="<%= person.dateOfBirth && person.dateOfBirth.toISOString().slice(0, 10) %>"></label>
+				<label><span>Eye color: </span><input type='text' placeholder='Eye color' name='eyeColor' value="<%= person.eyeColor %>"></label>
+				<label><span>Place of birth: </span><input type='text' placeholder='Place of birth' name='placeOfBirth' value="<%= person.placeOfBirth %>"></label>
+				<label><span>Weight: </span><input type='text' placeholder='Weight' name='weight' value="<%= person.weight %>"></label>
+				<label><span>Race: </span><input type='text' placeholder='Race' name='race' value="<%= person.race %>"></label>
+				<label><span>Image: </span><input type="file" name="file"></label>
+			</div>
+			<input type='hidden' name='lat' id='lat' value="<%= person.lat %>">
+			<input type='hidden' name='lon' id='lon' value="<%= person.lon %>">
+			<input type='hidden' name='id' id='id' value="<%= person.id %>">
+			<div id='mymap' class="mymap" style="height: 430px;"></div>
+			<div class="description">
+				<h2><span>Description:</span></h2><textarea placeholder='Description' name='description'></textarea>
+			</div>
+			<div class="upCan">
+				<button class="update">Update</button>
+				<a class="update" href="/persons/<%= person.id %>">Cancel</a>
+			</div>
+		</form>
+	</section>
 </section>
 <script src="/js/leaflet.js"></script>
 <script>
@@ -61,7 +64,6 @@
       map.panTo(new L.LatLng(position.lat, position.lng))
     });
     map.addLayer(marker);
-    console.log(e.latlng.lat);
     document.getElementById('lat').value = e.latlng.lat;
     document.getElementById('lon').value = e.latlng.lng;
   };
