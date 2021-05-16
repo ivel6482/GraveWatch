@@ -5,7 +5,7 @@ const connectDB = require('./config/database')
 const passport = require('passport')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
-const mainRoutes = require('./routes/main')
+const authRoutes = require('./routes/auth')
 const personRoutes = require('./routes/persons')
 const flash = require('express-flash')
 const mongoose = require('mongoose')
@@ -49,7 +49,7 @@ app.use(passport.session())
 
 app.use(flash())
 
-app.use('/', mainRoutes)
+app.use('/auth', authRoutes)
 app.use('/persons', personRoutes) //this is attaching to the route, in persons.js
 
 app.listen(process.env.PORT, () =>

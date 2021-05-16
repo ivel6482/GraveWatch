@@ -4,21 +4,22 @@ const PersonSchema = new mongoose.Schema(
 	{
 		name: {
 			type: String,
-			required: true,
+			required: [true, 'Please provide a name.'],
 		},
 		picture: {
 			type: String,
 			// default: '/uploads/placeholder.png', // example
-			required: true,
+			// required: true,
 		},
 		description: {
 			type: String,
-			required: true,
+			required: [true, 'Please provide a description'],
+			trim: true,
 		},
 		status: {
 			type: String,
 			required: true,
-			enum: ['missing', 'found', 'deceased', 'kidnapped'],
+			enum: ['missing', 'found', 'deceased'],
 			default: 'missing',
 		},
 		hairColor: {
@@ -27,19 +28,20 @@ const PersonSchema = new mongoose.Schema(
 		},
 		lastSeenDate: {
 			type: Date,
-			default: 'Unknown',
 		},
 		lat: {
 			type: String,
-			required: true,
+			required: [true, 'Please provide a latitude'],
 		},
 		lon: {
 			type: String,
-			required: true,
+			required: [true, 'Please provide a longitude'],
 		},
-		sex: {
+		gender: {
 			type: String,
-			required: true,
+			enum: ['male', 'female', 'other', 'unknown'],
+			default: 'unknown',
+			required: [true, 'Please provide a gender'],
 		},
 		height: {
 			type: String,
@@ -47,7 +49,6 @@ const PersonSchema = new mongoose.Schema(
 		},
 		dateOfBirth: {
 			type: Date,
-			default: 'Unknown',
 		},
 		eyeColor: {
 			type: String,
@@ -71,10 +72,6 @@ const PersonSchema = new mongoose.Schema(
 		},
 		cloudinaryId: {
 			type: String,
-		},
-		createdAt: {
-			type: Date,
-			default: Date.now,
 		},
 	},
 	{ timestamps: true }
