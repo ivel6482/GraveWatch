@@ -8,62 +8,119 @@
 		<div class="submissionContainer">
 			<h2>File a Missing Persons Report</h2>
 			<output class="notification" aria-live="polite"></output>
-			<form class="submissionform" id="add-person-form" action="/persons/createPerson" method="POST" enctype="multipart/form-data">
+			<form
+				class="submissionform"
+				id="add-person-form"
+				action="/persons/createPerson"
+				method="POST"
+				enctype="multipart/form-data"
+			>
 				<div class="form">
-					<label><span>Name: </span><input type='text' placeholder='Enter a name' name='name'></label>
-					<label><span>Status: </span><select name="status">
-						<option value="missing">Missing</option>
-						<option value="found">Found</option>
-						<option value="deceased">Deceased</option>
-						<option value="kidnapped">Kidnapped</option>
-					</select></label>
-					<label><span>Hair color: </span><input type='text' placeholder='Hair Color' name='hairColor'></label>
-					<label><span>Last seen: </span><input type='date' name='lastSeenDate'></label>
-					<label><span>Sex: </span><select name="sex">
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-						<option value="transfeminine">Transfeminine</option>
-						<option value="transmasculine">Transmasculine</option>
-						<option value="other">Other</option>
-					</select></label>
-					<label><span>Height: </span><input type='text' placeholder='Height' name='height'></label>
+					<label
+						><span>Name: </span
+						><input type="text" placeholder="Enter a name" name="name"
+					/></label>
+					<label
+						><span>Status: </span
+						><select name="status">
+							<option value="missing">Missing</option>
+							<option value="found">Found</option>
+							<option value="deceased">Deceased</option>
+							<option value="kidnapped">Kidnapped</option>
+						</select></label
+					>
+					<label
+						><span>Hair color: </span
+						><input type="text" placeholder="Hair Color" name="hairColor"
+					/></label>
+					<label
+						><span>Last seen: </span><input type="date" name="lastSeenDate"
+					/></label>
+					<label
+						><span>Sex: </span
+						><select name="sex">
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+							<option value="transfeminine">Transfeminine</option>
+							<option value="transmasculine">Transmasculine</option>
+							<option value="other">Other</option>
+						</select></label
+					>
+					<label
+						><span>Height: </span
+						><input type="text" placeholder="Height" name="height"
+					/></label>
 				</div>
 				<div class="form">
-					<label><span>Date of birth: </span><input type='date' name='dateOfBirth'></label>
-					<label><span>Eye color: </span><input type='text' placeholder='Eye color' name='eyeColor'></label>
-					<label><span>Place of birth: </span><input type='text' placeholder='Place of birth' name='placeOfBirth'></label>
-					<label><span>Weight: </span><input type='text' placeholder='Weight' name='weight'></label>
-					<label><span>Race: </span><input type='text' placeholder='Race' name='race'></label>
-					<label><span>Image: </span><input type="file" name="file"></label>
+					<label
+						><span>Date of birth: </span><input type="date" name="dateOfBirth"
+					/></label>
+					<label
+						><span>Eye color: </span
+						><input type="text" placeholder="Eye color" name="eyeColor"
+					/></label>
+					<label
+						><span>Place of birth: </span
+						><input
+							type="text"
+							placeholder="Place of birth"
+							name="placeOfBirth"
+					/></label>
+					<label
+						><span>Weight: </span
+						><input type="text" placeholder="Weight" name="weight"
+					/></label>
+					<label
+						><span>Race: </span
+						><input type="text" placeholder="Race" name="race"
+					/></label>
+					<label><span>Image: </span><input type="file" name="file" /></label>
 				</div>
-				<input required type='hidden' name='lat' id='lat'>
-				<input required type='hidden' name='lon' id='lon'>
+				<input required type="hidden" name="lat" id="lat" />
+				<input required type="hidden" name="lon" id="lon" />
 				<h2>Click on the map to select the last known location</h2>
-				<div id='mymap' class="mymap" style="height: 430px;"></div>
+				<div id="mymap" class="mymap" style="height: 430px"></div>
 				<div class="description">
-					<h2><span>Description:</span></h2><textarea placeholder='Description' name='description'></textarea>
+					<h2><span>Description:</span></h2>
+					<textarea placeholder="Description" name="description"></textarea>
 				</div>
 				<button class="submitbutton">Submit</button>
 			</form>
 		</div>
 	</section>
 	<h2>Your Submissions</h2>
-		<%_ if(!persons || persons.length === 0) { _%>
-			<p>You have not submitted any persons</p>
-		<% } else { %>
-			<ul class="submissionslist">
-				<% persons.forEach(person => { %>
-					<li class="submission" data-id='<%= `${person._id}` %>'>
-						<a href="<%= `/persons/${person._id}` %>"><img class="submissionimage" src="<%= person.picture %>" alt="<%= `${person.name}` %>" loading="lazy" width="64" height="64"></a>
-						<a href="<%= `/persons/${person._id}` %>" class="submissionname"><%= person.name %></a>
-						<div class="submissionbuttons">
-				<a class="submissionbutton" href="<%= `/persons/updatePerson/${person._id}` %>">Update</a>
-				<button class='del submissionbutton' data-id="<%= person.id %>">Delete</button>
-						</div>
-			</li>
-				<% }) %>
-			</ul>
-		<%_ } _%>
+	<%_ if(!persons || persons.length === 0) { _%>
+	<p>You have not submitted any persons</p>
+	<% } else { %>
+	<ul class="submissionslist">
+		<% persons.forEach(person => { %>
+		<li class="submission" data-id="<%= `${person._id}` %>">
+			<a href="<%= `/persons/${person._id}` %>"
+				><img
+					class="submissionimage"
+					src="<%= person.picture %>"
+					alt="<%= `${person.name}` %>"
+					loading="lazy"
+					width="64"
+					height="64"
+			/></a>
+			<a href="<%= `/persons/${person._id}` %>" class="submissionname"
+				><%= person.name %></a
+			>
+			<div class="submissionbuttons">
+				<a
+					class="submissionbutton"
+					href="<%= `/persons/updatePerson/${person._id}` %>"
+					>Update</a
+				>
+				<button class="del submissionbutton" data-id="<%= person.id %>">
+					Delete
+				</button>
+			</div>
+		</li>
+		<% }) %>
+	</ul>
+	<%_ } _%>
 </section>
 <script src="/js/leaflet.js"></script>
 <script src="/js/profilemap.js"></script>

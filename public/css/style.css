@@ -1,56 +1,56 @@
 /* General styles */
-*{
-  box-sizing: border-box;
+* {
+	box-sizing: border-box;
 }
 /* Clear fix hack */
 .clearfix:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
+	content: '.';
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
 }
 .clear {
 	clear: both;
 }
 body {
-  background: #e0e0e0;
-  font-family: 'Roboto', sans-serif;
+	background: #e0e0e0;
+	font-family: 'Roboto', sans-serif;
 	max-width: 120rem;
 	margin: 0 auto;
 	min-height: 100vh;
 }
 button {
 	cursor: pointer;
-  border: none;
+	border: none;
 }
 span {
-  font-weight: bold;
-  color: #36619b;
+	font-weight: bold;
+	color: #36619b;
 }
 /*Header.ejs*/
 header {
-  display: flex;
-  justify-content: space-between
+	display: flex;
+	justify-content: space-between;
 }
 header ul {
-  font-size: 25px;
-  display: flex;
+	font-size: 25px;
+	display: flex;
 }
 header a {
-  color: #36619b;
+	color: #36619b;
 }
 h1 {
-  font-weight: bold;
-  font-size: 3rem;
-  color: #36619b;
+	font-weight: bold;
+	font-size: 3rem;
+	color: #36619b;
 }
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 ul {
-  list-style-type: none;
+	list-style-type: none;
 }
 /*Footer.ejs*/
 footer {
@@ -58,73 +58,73 @@ footer {
 }
 /*Index.ejs*/
 .container {
-  margin: 0 10% 0 10%;
+	margin: 0 10% 0 10%;
 }
 title h2 {
-  font-size: 40px;
-  line-height: 40px;
-  margin-bottom: 5px;
+	font-size: 40px;
+	line-height: 40px;
+	margin-bottom: 5px;
 }
 .missingPersons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
 }
 .missingPersons ul {
-  display: flex;
-  flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 .missingPersons img {
-  width: 18rem;
-  object-fit: fill;
-  height: 20rem;
-  padding: 15px
+	width: 18rem;
+	object-fit: fill;
+	height: 20rem;
+	padding: 15px;
 }
 .missingPersons p {
-  text-align: center;
-  margin: 0;
-  font-size: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
+	text-align: center;
+	margin: 0;
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 .missingPersons a {
-  color: #40a0d7;
-  text-decoration: none;
+	color: #40a0d7;
+	text-decoration: none;
 }
 /*Signup.ejs*/
 .accountContainer {
-  font-weight: bold;
+	font-weight: bold;
 	display: block;
 	margin: 0 auto;
 	max-width: max-content;
-  border-radius: 20px;
-  border: 2px solid white;
-  padding: 2%;
+	border-radius: 20px;
+	border: 2px solid white;
+	padding: 2%;
 }
 .accountContainer h2 {
-  text-align: center;
-  font-size: 40px;
+	text-align: center;
+	font-size: 40px;
 }
 .accountContainer form {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 .accountContainer label {
-  padding: 2%;
+	padding: 2%;
 }
 .accountContainer input {
-  width: 100%;
+	width: 100%;
 }
 .accountContainer button {
-  height: 30px;
-  width: 80px;
-  margin: 2%;
-  background: #40a0d7;
-  color: white;
+	height: 30px;
+	width: 80px;
+	margin: 2%;
+	background: #40a0d7;
+	color: white;
 }
 .accountContainer p {
-  padding: 2%;
+	padding: 2%;
 }
 /*Login.ejs*/
 
@@ -150,21 +150,21 @@ title h2 {
 	transform: translate(-50%, 0%);
 }
 .submissionContainer h2 {
-  text-align: center;
+	text-align: center;
 }
 .submissionform {
-  display: grid;
+	display: grid;
 	grid-template: repeat(5, auto) / 1fr 1fr;
 	justify-items: center;
-  width: 60rem;
-  margin: 0 auto;
-  padding-bottom: 1rem;
+	width: 60rem;
+	margin: 0 auto;
+	padding-bottom: 1rem;
 }
 .submissionform label {
 	display: flex;
 	justify-content: end;
 	gap: 1rem;
-  margin: 2rem 0;
+	margin: 2rem 0;
 }
 .submissionform input,
 .submissionform select {
@@ -187,12 +187,12 @@ title h2 {
 }
 .submitbutton {
 	grid-column: 1 / 3;
-  background-color: #40a0d7;
-  color: white;
-  padding: 0.5em 1em;
-  display: flex;
-  margin: 0 auto;
-  font-size: 100%;
+	background-color: #40a0d7;
+	color: white;
+	padding: 0.5em 1em;
+	display: flex;
+	margin: 0 auto;
+	font-size: 100%;
 }
 .submissionslist {
 	padding: 0;
@@ -221,7 +221,8 @@ title h2 {
 	display: flex;
 	flex-direction: column;
 }
-.submissionbutton, .update {
+.submissionbutton,
+.update {
 	display: inline-block;
 	border: none;
 	font-size: 90%;
@@ -232,57 +233,57 @@ title h2 {
 }
 /*Person.ejs*/
 .mainsectiontop {
-  display: flex;
-  justify-content: space-around;
-  height: 500px;
+	display: flex;
+	justify-content: space-around;
+	height: 500px;
 }
 article {
-  width: 50%;
-  float: left;
+	width: 50%;
+	float: left;
 }
-.mainsectionbottom{
-  padding: 25px;
-  height:50%;
-  align-content: center;
+.mainsectionbottom {
+	padding: 25px;
+	height: 50%;
+	align-content: center;
 }
 .mainsectionbottom h2 {
-  text-align: center;
+	text-align: center;
 }
 .infoWrapper {
-  display: flex;
-  justify-content: space-evenly;
+	display: flex;
+	justify-content: space-evenly;
 }
 .description {
-  text-align: center;
-  padding-bottom: 1rem;
-  margin: 0 auto;
-  width: 60rem;
+	text-align: center;
+	padding-bottom: 1rem;
+	margin: 0 auto;
+	width: 60rem;
 }
 #submission {
-  align-self:left;
+	align-self: left;
 }
 #submission p {
-  margin: 0;
+	margin: 0;
 }
 .bigimage img {
-  width: 100%;
-  object-fit: contain;
-  height: 26.3rem;
-  padding: 1rem;
+	width: 100%;
+	object-fit: contain;
+	height: 26.3rem;
+	padding: 1rem;
 }
-.smallerimges{
-    width:100%;
+.smallerimges {
+	width: 100%;
 }
 /*Update.ejs*/
 .updateContainer h2 {
-  text-align: center;
+	text-align: center;
 }
 .upCan {
 	grid-column: 1 / 3;
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 /*Footer.ejs*/
 footer {
-  text-align: center;
+	text-align: center;
 }

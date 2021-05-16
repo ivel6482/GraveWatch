@@ -1,20 +1,26 @@
 <%- include('partials/header') -%>
 <section class="container">
-<section class="title">
-  <h2>Current Missing/Kidnapped People</h2>
-  <p>Click on an image to see more information</p>
-</section>
-<div class="missingPersons">
-  <ul>
-    <% persons.forEach(person => { %>
-      <li>
-        <a href="<%= `/persons/${person._id}` %>">
-          <img src="<%= person.picture %>" alt="<%= `${person.name}` %>" loading="lazy">
-        </a>
-        <p><a href="<%= `/persons/${person._id}` %>"><%= `${person.name}` %></a></p>
-      </li>
-    <% }) %>
-  </ul> 
-</div>
+	<section class="title">
+		<h2>Current Missing/Kidnapped People</h2>
+		<p>Click on an image to see more information</p>
+	</section>
+	<div class="missingPersons">
+		<ul>
+			<% persons.forEach(person => { %>
+			<li>
+				<a href="<%= `/persons/${person._id}` %>">
+					<img
+						src="<%= person.picture %>"
+						alt="<%= `${person.name}` %>"
+						loading="lazy"
+					/>
+				</a>
+				<p>
+					<a href="<%= `/persons/${person._id}` %>"><%= `${person.name}` %></a>
+				</p>
+			</li>
+			<% }) %>
+		</ul>
+	</div>
 </section>
 <%- include('partials/footer') -%>

@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Searching4U</title>
-  <link rel="stylesheet" href="/css/style.css">
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-	<% if(leaflet) { %>
-  <!-- Leaflet stylesheet and Script -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-   crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-   crossorigin=""></script>
-   <!-- Map Search Plugin Stylesheet and Script -->
-   <script src="https://rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script>
-   <link rel="stylesheet" href="https://rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.css">
-	<% } %>
-	<script src="/js/main.js" defer></script>
-</head>
-<body>
-<header class="container">
-  <h1><a href="/">Searching4U</a></h1>
-  <ul>
-<% if(user) { %>
-	<li><a href="/profile">Profile/</a></li>
-	<li><a href="/logout">Logout</a></li>
-<% } else { %>
-		<li><a href="/login">Login/</a></li>
-		<li><a href="/signup">Sign Up</a></li>
-<% } %>
-</ul>
-</header>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Searching4U</title>
+		<link rel="stylesheet" href="/css/style.css" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<% if(leaflet) { %>
+		<!-- Leaflet stylesheet and Script -->
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+			integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+			crossorigin=""
+		/>
+		<script
+			src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+			integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+			crossorigin=""
+		></script>
+		<!-- Map Search Plugin Stylesheet and Script -->
+		<script src="https://rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.css"
+		/>
+		<% } %>
+		<script src="/js/main.js" defer></script>
+	</head>
+	<body>
+		<header class="container">
+			<h1><a href="/">Searching4U</a></h1>
+			<ul>
+				<% if(user) { %>
+				<li><a href="/profile">Profile/</a></li>
+				<li><a href="/logout">Logout</a></li>
+				<% } else { %>
+				<li><a href="/login">Login/</a></li>
+				<li><a href="/signup">Sign Up</a></li>
+				<% } %>
+			</ul>
+		</header>
+	</body>
+</html>
