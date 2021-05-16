@@ -15,7 +15,8 @@ exports.login = (req, res, next) => {
 			}
 			req.flash('success', { msg: 'You are logged in.' })
 			// res.redirect(req.session.returnTo || '/profile')
-			res.json(user)
+			const { name, _id, email } = user
+			res.json({ _id, name, email })
 		})
 	})(req, res, next)
 }
@@ -59,7 +60,8 @@ exports.signup = (req, res, next) => {
 				if (err) {
 					return next(err)
 				}
-				res.json(user)
+				const { _id, name, email } = user
+				res.json({ _id, name, email })
 			})
 		})
 	})
