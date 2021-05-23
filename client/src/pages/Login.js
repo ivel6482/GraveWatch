@@ -1,10 +1,14 @@
 import Button from '../components/UI/Button'
+import axios from 'axios'
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+
 export default function Login() {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	//TODO: Comment code to better understand the flow of the state.
+	const history = useHistory()
+
 	const checkHandlerEmail = (e) => {
 		e.preventDefault()
 		setEmail(e.target.value)
@@ -15,12 +19,28 @@ export default function Login() {
 		setPassword(e.target.value)
 	}
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
-		alert(email)
-		alert(password)
-		setEmail('')
-		setPassword('')
+		// make request with axios to api
+		// send email and password
+		// authenticate and redirect to /profile
+		try {
+			const res = await axios.post(
+				'/auth/login',
+				{ email, password },
+				{
+					'Content-type': 'application/json',
+				}
+			)
+			setEmail('')
+			setPassword('')
+			history.push({
+				pathname: '/profile',
+				state: res.data,
+			})
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	return (
