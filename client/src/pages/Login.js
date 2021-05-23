@@ -4,6 +4,7 @@ export default function Login() {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
+	//TODO: Comment code to better understand the flow of the state.
 	const checkHandlerEmail = (e) => {
 		e.preventDefault()
 		setEmail(e.target.value)
