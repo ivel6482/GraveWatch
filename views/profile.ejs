@@ -257,28 +257,34 @@
 			<p>Submit a missing person above.</p>
 		</div>
 		<% } else { %>
-		<ul class="submissionslist">
+		<ul class="grid grid-cols-2 gap-2">
 			<% persons.forEach(person => { %>
-			<li class="submission" data-id="<%= `${person._id}` %>">
-				<a href="<%= `/persons/${person._id}` %>"
-					><img
-						class="submissionimage"
-						src="<%= person.picture %>"
-						alt="<%= `${person.name}` %>"
-						loading="lazy"
-						width="64"
-						height="64"
-				/></a>
-				<a href="<%= `/persons/${person._id}` %>" class="submissionname"
-					><%= person.name %></a
-				>
-				<div class="submissionbuttons">
+			<li class="overflow-hidden bg-white rounded shadow">
+				<a href="<%= `/persons/${person._id}` %>">
+					<div class="bg-gray-100">
+						<img
+							src="<%= person.picture %>"
+							class="object-cover w-full h-40"
+							alt="<%= `${person.name}` %>"
+							loading="lazy"
+						/>
+					</div>
+				</a>
+				<div class="p-3">
+					<p>
+						<a href="<%= `/persons/${person._id}` %>"
+							><%= `${person.name}` %></a
+						>
+					</p>
+				</div>
+
+				<div class="flex overflow-hidden text-sm text-gray-600 border-t divide-x vorder justify-evenly">
 					<a
-						class="submissionbutton"
+						class="w-1/2 py-2 text-center submissionbutton"
 						href="<%= `/persons/updatePerson/${person._id}` %>"
 						>Update</a
 					>
-					<button class="del submissionbutton" data-id="<%= person.id %>">
+					<button class="w-1/2 py-2 text-center del submissionbutton" data-id="<%= person.id %>">
 						Delete
 					</button>
 				</div>
