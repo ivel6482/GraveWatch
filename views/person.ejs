@@ -1,5 +1,5 @@
 <%- include('partials/header') -%>
-<div class='container'>
+<div class='container p-4'>
   <% if(user && user.id == person.user.id) { %>
 	<a class="update" href="<%= `/persons/updatePerson/${person.id}` %>">Update</a>
 	<button class='del update' data-id="<%= person.id %>">Delete</button>
