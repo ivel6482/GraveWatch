@@ -1,61 +1,128 @@
 <%- include('partials/header') -%>
-<div class='container p-4'>
-  <% if(user && user.id == person.user.id) { %>
-	<a class="update" href="<%= `/persons/updatePerson/${person.id}` %>">Update</a>
-	<button class='del update' data-id="<%= person.id %>">Delete</button>
-  <% } %>
-  <div class="mainsectiontop">
-        <article class="leftsection">
-            <section id="submission">
-                <p class="name"><span>Name: </span><%= person.name %></p>
-                <p class="submittedby"><span>Submitted By: </span><%= person.user.name %></p>
-                <p class="datesubmitted"><span>Date Submitted: </span><%= new Intl.DateTimeFormat('en', {dateStyle: 'full', timeStyle: 'short'}).format(person.createdAt) %></p>
-                <p class="status"><span>Status: </span><%= person.status %></p>
-            <section class="bigimage">                       <img src="<%= person.picture %>" alt="<%= person.name %>">
-            </section>
-            </section>
-        </article>
-        <article class="rightsection">
-            <h2><span>Last Seen:</span></h2>
-            <div id='mymap' class="lastSeenMap" style="height: 430px;"></div>
-            <section class="mapimage"></section>
-            <section>
-                <span class="Date">Last seen date: <%= person.lastSeenDate && new Intl.DateTimeFormat('en', {dateStyle: 'full'}).format(person.lastSeenDate) %> </span>
-                <span class="Location">Location:</span>
-            </section>
-        </article>
-  </div>
-  <section class="mainsectionbottom">
-       <h2><span>Information</span></h2>
-       <section class="infoWrapper">
-            <section>
-                <p class="DOB"><span>Date Of Birth: </span><%= person.dateOfBirth && new Intl.DateTimeFormat('en', {dateStyle: 'long'}).format(person.dateOfBirth)  %></p>
-                <p class="hair"><span>Hair Color: </span><%= person.hairColor %></p>
-                <p class="height"><span>Height: </span><%= person.height %></p>
-                <p class="race"><span>Race: </span><%= person.race %> </p>
-            </section>
-            <section>
-                <p class="birthplace"><span>Birth Place: </span><%= person.placeOfBirth %></p>
-                <p class="eyes"><span>Eye Color: </span><%= person.eyeColor %> </p>
-                <p class="weight"><span>Weight: </span><%= person.weight %> </p>
-                <p class="sex"><span>Sex: </span><%= person.sex %> </p>
-            </section>
-            </section>
-        </section>
-        <section class="description">
-            <h2><span>Description</span></h2>
-            <p class=""><%= person.description %></p>
-        </section>
-        <h4>Submit a Tip:</h4>
-        <p>If you have any information concerning this person, please contact <a href="mailto:infotip@searching4u.com">infotip@searching4u.com</a></p>
-  </section>
+<div class="container p-4">
+	<% if(user && user.id == person.user.id) { %>
+	<a class="update" href="<%= `/persons/updatePerson/${person.id}` %>"
+		>Update</a
+	>
+	<button class="del update" data-id="<%= person.id %>">Delete</button>
+	<% } %>
+	<div class="flex flex-col">
+		<article class="flex flex-col">
+			<section class="order-2 space-y-2" id="submission">
+				<p class="text-xl"><%= person.name %></p>
+				<dl class="mb-3 space-y-3">
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Submitted By</dt>
+						<dd class="mt-1 text-sm text-gray-900"><%= person.user.name %></dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Date Submitted</dt>
+						<dd class="mt-1 text-sm text-gray-900">
+							<%= new Intl.DateTimeFormat('en', {dateStyle: 'full', timeStyle:
+							'short'}).format(person.createdAt) %>
+						</dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Status</dt>
+						<dd class="mt-1 text-sm text-gray-900">
+							<span
+								class="
+									inline-flex
+									items-center
+									px-2.5
+									py-0.5
+									rounded-full
+									text-xs
+									font-semibold
+									bg-red-100
+									text-red-800
+								"
+							>
+								<%= person.status %>
+							</span>
+						</dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Last seen date</dt>
+						<dd class="mt-1 text-sm text-gray-900">
+							<%= person.lastSeenDate && new Intl.DateTimeFormat('en',
+							{dateStyle: 'full'}).format(person.lastSeenDate) %>
+						</dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Date Of Birth</dt>
+						<dd class="mt-1 text-sm text-gray-900">
+							<%= person.dateOfBirth && new Intl.DateTimeFormat('en',
+							{dateStyle: 'long'}).format(person.dateOfBirth) %>
+						</dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Hair Color</dt>
+						<dd class="mt-1 text-sm text-gray-900"><%= person.hairColor %></dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Height</dt>
+						<dd class="mt-1 text-sm text-gray-900"><%= person.height %></dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Race</dt>
+						<dd class="mt-1 text-sm text-gray-900"><%= person.race %></dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Birth Place</dt>
+						<dd class="mt-1 text-sm text-gray-900">
+							<%= person.placeOfBirth %>
+						</dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Eye Color</dt>
+						<dd class="mt-1 text-sm text-gray-900"><%= person.eyeColor %></dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Weight</dt>
+						<dd class="mt-1 text-sm text-gray-900"><%= person.weight %></dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Sex</dt>
+						<dd class="mt-1 text-sm text-gray-900"><%= person.sex %></dd>
+					</div>
+					<div>
+						<dt class="text-sm font-semibold text-gray-500">Description</dt>
+						<dd class="mt-1 text-sm text-gray-900">
+							<%= person.description %>
+						</dd>
+					</div>
+				</dl>
+			</section>
+			<section class="order-1 rounded-md">
+				<img
+					class="overflow-hidden"
+					src="<%= person.picture %>"
+					alt="<%= person.name %>"
+				/>
+			</section>
+		</article>
+		<article class="mt-4">
+			<div id="mymap" class="rounded-md shadow" style="height: 430px"></div>
+			<!-- <section class="mapimage"></section> -->
+		</article>
+	</div>
+	<div class="p-2 mt-3 text-white bg-blue-600 rounded-md">
+		<h4 class="mb-3 text-lg">Submit a Tip:</h4>
+		<p>
+			If you have any information concerning this person, please contact
+			<a class="font-semibold" href="mailto:infotip@searching4u.com"
+				>infotip@searching4u.com</a
+			>
+		</p>
+	</div>
 </div>
 <!-- Load leaflet.js -->
 <script src="/js/leaflet.js"></script>
 <script>
-  /* Define a marker using person lon and lat */
-  var marker = new L.Marker([<%= person.lat %>, <%= person.lon %>]).addTo(map);
-  marker.bindPopup("Last seen location of <%= person.name %>").openPopup();
-  map.setView(marker.getLatLng(), 12);
+	/* Define a marker using person lon and lat */
+	var marker = new L.Marker([<%= person.lat %>, <%= person.lon %>]).addTo(map);
+	marker.bindPopup("Last seen location of <%= person.name %>").openPopup();
+	map.setView(marker.getLatLng(), 12);
 </script>
 <%- include('partials/footer') -%>
