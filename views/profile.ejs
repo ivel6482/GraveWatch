@@ -264,7 +264,7 @@
 					<div class="bg-gray-100">
 						<img
 							src="<%= person.picture %>"
-							class="object-cover w-full h-40"
+							class="object-contain w-full h-52"
 							alt="<%= `${person.name}` %>"
 							loading="lazy"
 						/>
@@ -280,11 +280,11 @@
 
 				<div class="flex overflow-hidden text-sm text-gray-600 border-t divide-x vorder justify-evenly">
 					<a
-						class="w-1/2 py-2 text-center submissionbutton"
+						class="w-1/2 py-2 text-center submissionbutton hover:bg-gray-100"
 						href="<%= `/persons/updatePerson/${person._id}` %>"
 						>Update</a
 					>
-					<button class="w-1/2 py-2 text-center del submissionbutton" data-id="<%= person.id %>">
+					<button class="w-1/2 py-2 text-center hover:bg-gray-100 del submissionbutton" data-id="<%= person.id %>">
 						Delete
 					</button>
 				</div>

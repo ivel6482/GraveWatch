@@ -89,17 +89,21 @@
 				</dl>
 			</section>
 			<section class="order-1">
-				<img src="<%= person.picture %>" alt="<%= person.name %>" />
+				<img
+					class="xl:h-[800px] object-contain w-full"
+					src="<%= person.picture %>"
+					alt="<%= person.name %>"
+				/>
 
 				<% if(user && user.id == person.user.id) { %>
-				<div class="flex justify-end w-full gap-3 mt-3">
+				<div class="flex justify-end w-full gap-3 mt-3 xl:justify-center">
 					<a
-						class="px-2 py-1 text-white bg-gray-700 update"
+						class="px-2 py-1 text-white bg-gray-700 hover:bg-gray-900 update"
 						href="<%= `/persons/updatePerson/${person.id}` %>"
 						>Update</a
 					>
 					<button
-						class="px-2 py-1 text-gray-700 border border-gray-700 del update"
+						class="px-2 py-1 text-gray-700 border border-gray-700  hover:bg-gray-700 hover:text-white del update"
 						data-id="<%= person.id %>"
 					>
 						Delete

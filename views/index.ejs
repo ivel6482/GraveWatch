@@ -8,14 +8,16 @@
 		>
 	</section>
 	<div class="my-4">
-		<ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+		<ul
+			class="grid grid-cols-2 gap-4  sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+		>
 			<% persons.forEach(person => { %>
 			<li class="overflow-hidden bg-white rounded shadow">
 				<a href="<%= `/persons/${person._id}` %>">
 					<div class="bg-gray-100">
 						<img
 							src="<%= person.picture %>"
-							class="object-cover w-full h-40 sm:h-52"
+							class="object-contain w-full h-40 sm:h-52 lg:h-60"
 							alt="<%= `${person.name}` %>"
 							loading="lazy"
 						/>
