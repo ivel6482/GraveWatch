@@ -1,47 +1,230 @@
 <%- include('partials/header') -%>
-<section class="container">
+<section class="container p-4 mx-auto">
   <section class="updateContainer">
-		<p><span>UserName: </span><%= `${user.name}`%></p>
-		<p><span>Email: </span><%= `${user.email}`%></p>
-		<h2>Update Missing Persons Report</h2>
-		<form class="submissionform update-person-form" action="/persons/createPerson" method="POST" enctype="multipart/form-data">
-			<div class="form">
-				<label><span>Name: </span><input type='text' placeholder='Enter a name' name='name' value="<%= person.name %>"></label>
-				<label><span>Status: </span><select name="status">
+		<h2 class="text-xl">Update Missing Persons Report</h2>
+		<form class="mt-3 space-y-3 submissionform update-person-form" action="/persons/createPerson" method="POST" enctype="multipart/form-data">
+				<div>
+					<label for="name" class="block text-sm font-medium text-gray-700"
+						>Name</label
+					>
+					<div class="mt-1">
+						<input
+							type="text"
+							name="name"
+							id="name"
+							value="<%= person.name %>"
+							class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+							placeholder="Jane Doe"
+						/>
+					</div>
+				</div>
+				<div>
+					<label for="status" class="block text-sm font-medium text-gray-700"
+						>Status</label
+					>
+					<select
+						id="status"
+						name="status"
+						class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+					>
 					<option value="missing" <%= person.status === 'missing' && 'selected' %>>Missing</option>
 					<option value="found" <%= person.status === 'found' && 'selected' %>>Found</option>
 					<option value="deceased" <%= person.status === 'deceased' && 'selected' %>>Deceased</option>
 					<option value="kidnapped" <%= person.status === 'kidnapped' && 'selected' %>>Kidnapped</option>
-				</select></label>
-				<label><span>Hair color: </span><input type='text' placeholder='Hair Color' name='hairColor' value="<%= person.hairColor %>"></label>
-				<label><span>Last seen: </span><input type='date' name='lastSeenDate' value="<%= person.lastSeenDate && person.lastSeenDate.toISOString().slice(0, 10) %>"></label>
-				<label><span>Sex: </span><select name="sex">
-					<option value="male" <%= person.sex === 'male' && 'selected' %>>Male</option>
-					<option value="female" <%= person.sex === 'female' && 'selected' %>>Female</option>
-					<option value="transfeminine" <%= person.sex === 'transfeminine' && 'selected' %>>Transfeminine</option>
-					<option value="transmasculine" <%= person.sex === 'transmasculine' && 'selected' %>>Transmasculine</option>
-					<option value="other" <%= person.sex === 'other' && 'selected' %>>Other</option>
-					</select></label>
-				<label><span>Height: </span><input type='text' placeholder='Height' name='height' value="<%= person.height %>"></label>
-			</div>
-			<div class="form">
-				<label><span>Date of birth: </span><input type='date' name='dateOfBirth' value="<%= person.dateOfBirth && person.dateOfBirth.toISOString().slice(0, 10) %>"></label>
-				<label><span>Eye color: </span><input type='text' placeholder='Eye color' name='eyeColor' value="<%= person.eyeColor %>"></label>
-				<label><span>Place of birth: </span><input type='text' placeholder='Place of birth' name='placeOfBirth' value="<%= person.placeOfBirth %>"></label>
-				<label><span>Weight: </span><input type='text' placeholder='Weight' name='weight' value="<%= person.weight %>"></label>
-				<label><span>Race: </span><input type='text' placeholder='Race' name='race' value="<%= person.race %>"></label>
-				<label><span>Image: </span><input type="file" name="file"></label>
-			</div>
+					</select>
+				</div>
+				<div>
+					<label for="hairColor" class="block text-sm font-medium text-gray-700"
+						>Hair color</label
+					>
+					<div class="mt-1">
+						<input
+							type="text"
+							name="hairColor"
+							id="hairColor"
+							value="<%= person.hairColor %>"
+							class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+							placeholder="Blonde"
+						/>
+					</div>
+				</div>
+				<div>
+					<label
+						for="lastSeenDate"
+						class="block text-sm font-medium text-gray-700"
+						>Last seen</label
+					>
+					<div class="mt-1">
+						<input
+							type="date"
+							name="lastSeenDate"
+							id="lastSeenDate"
+							class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+							value="<%= person.lastSeenDate && person.lastSeenDate.toISOString().slice(0, 10) %>"
+							placeholder="Blonde"
+						/>
+					</div>
+				</div>
+				
+				<div>
+					<label for="sex" class="block text-sm font-medium text-gray-700"
+						>Sex</label
+					>
+					<select
+						id="sex"
+						name="sex"
+						class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+					>
+						<option value="male" <%= person.sex === 'male' && 'selected' %>>Male</option>
+						<option value="female" <%= person.sex === 'female' && 'selected' %>>Female</option>
+						<option value="transfeminine" <%= person.sex === 'transfeminine' && 'selected' %>>Transfeminine</option>
+						<option value="transmasculine" <%= person.sex === 'transmasculine' && 'selected' %>>Transmasculine</option>
+						<option value="other" <%= person.sex === 'other' && 'selected' %>>Other</option>
+					</select>
+				</div>
+				<div>
+					<label for="height" class="block text-sm font-medium text-gray-700"
+						>Height</label
+					>
+					<div class="mt-1">
+						<input
+							type="text"
+							name="height"
+							id="height"
+							value="<%= person.height %>"
+							class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+							placeholder="5'11&quot;"
+						/>
+					</div>
+				</div>
+				<div>
+					<label
+						for="dateOfBirth"
+						class="block text-sm font-medium text-gray-700"
+						>Date of birth</label
+					>
+					<div class="mt-1">
+						<input
+							type="date"
+							name="dateOfBirth"
+							id="dateOfBirth"
+							value="<%= person.dateOfBirth && person.dateOfBirth.toISOString().slice(0, 10) %>"
+							class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+							placeholder="Blonde"
+						/>
+					</div>
+				</div>
+				<div>
+					<label for="eyeColor" class="block text-sm font-medium text-gray-700"
+						>Eye color</label
+					>
+					<div class="mt-1">
+						<input
+							type="text"
+							name="eyeColor"
+							id="eyeColor"
+							value="<%= person.eyeColor %>"
+							class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+							placeholder="Brown"
+						/>
+					</div>
+				</div>
+				<div>
+					<label
+						for="placeOfBirth"
+						class="block text-sm font-medium text-gray-700"
+						>Place of birth</label
+					>
+					<div class="mt-1">
+						<input
+							type="text"
+							name="placeOfBirth"
+							id="placeOfBirth"
+							value="<%= person.placeOfBirth %>"
+							class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+							placeholder="United States"
+						/>
+					</div>
+				</div>
+				<div>
+					<label for="weight" class="block text-sm font-medium text-gray-700"
+						>Weight</label
+					>
+					<div class="mt-1">
+						<input
+							type="text"
+							name="weight"
+							id="weight"
+							value="<%= person.weight %>"
+							class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+							placeholder="140lbs"
+						/>
+					</div>
+				</div>
+				<div>
+					<label for="race" class="block text-sm font-medium text-gray-700"
+						>Race</label
+					>
+					<div class="mt-1">
+						<input
+							type="text"
+							name="race"
+							id="race"
+							value="<%= person.race %>"
+							class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+							placeholder="White"
+						/>
+					</div>
+				</div>
+				<div>
+          <label for="image" class="block text-sm font-medium text-gray-700">
+            Image
+          </label>
+          <div class="flex justify-center px-6 pt-5 pb-6 mt-1 border-2 border-gray-300 border-dashed rounded-md">
+            <div class="space-y-1 text-center">
+              <svg class="w-12 h-12 mx-auto text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <div class="flex text-sm text-gray-600">
+                <label for="file" class="relative font-medium text-gray-600 bg-white rounded-md cursor-pointer hover:text-gray-900 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-gray-900">
+                  <span class="font-semibold text-blue-600">Upload a file</span>
+                  <input id="file" name="file" type="file" class="sr-only">
+                </label>
+                <p class="pl-1">or drag and drop</p>
+              </div>
+              <p class="text-xs text-gray-900">
+                PNG, JPG 
+              </p>
+            </div>
+          </div>
+        </div>
 			<input type='hidden' name='lat' id='lat' value="<%= person.lat %>">
 			<input type='hidden' name='lon' id='lon' value="<%= person.lon %>">
 			<input type='hidden' name='id' id='id' value="<%= person.id %>">
-			<div id='mymap' class="mymap" style="height: 430px;"></div>
-			<div class="description">
-				<h2><span>Description:</span></h2><textarea placeholder='Description' name='description'></textarea>
-			</div>
-			<div class="upCan">
-				<button class="update">Update</button>
-				<a class="update" href="/persons/<%= person.id %>">Cancel</a>
+			<div id='mymap' class="rounded-md shadow mymap" style="height: 430px;"></div>
+			<div>
+					<label
+						for="description"
+						class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+					>
+						Description
+					</label>
+					<div class="mt-1">
+						<textarea
+							id="description"
+							name="description"
+							rows="3"
+							class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+						><%= person.description %></textarea>
+						<p class="mt-2 text-sm text-gray-900">
+							Here you can expand on more information. Be as detailed as
+							possible.
+						</p>
+					</div>
+				</div>
+			<div class="flex justify-end w-full gap-3">
+				<button class="px-2 py-1 text-white bg-gray-700 update">Update</button>
+				<a class="px-2 py-1 text-gray-700 border border-gray-700 update" href="/persons/<%= person.id %>">Cancel</a>
 			</div>
 		</form>
 	</section>

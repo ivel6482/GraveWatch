@@ -1,5 +1,5 @@
 <%- include('partials/header') -%>
-<section class="container p-4 mx-auto">
+<section class="container max-w-sm p-4 mx-auto">
 	<section class="space-y-3">
 		<div class="flex justify-between text-gray-600">
 			<p>Welcome, <%= `${user.name}`%></p>
@@ -257,7 +257,7 @@
 			<p>Submit a missing person above.</p>
 		</div>
 		<% } else { %>
-		<ul class="grid grid-cols-2 gap-2">
+		<ul class="grid grid-cols-2 gap-4">
 			<% persons.forEach(person => { %>
 			<li class="overflow-hidden bg-white rounded shadow">
 				<a href="<%= `/persons/${person._id}` %>">

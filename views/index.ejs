@@ -1,5 +1,5 @@
 <%- include('partials/header') -%>
-<section class="flex-1 p-4 text-gray-800">
+<section class="container flex-1 p-4 mx-auto text-gray-800">
 	<section>
 		<h2 class="text-xl">Current Missing/Kidnapped People</h2>
 		<small class="text-gray-600"
@@ -7,15 +7,15 @@
 			information</small
 		>
 	</section>
-	<div class="container mx-auto mt-4">
-		<ul class="grid grid-cols-2 gap-2">
+	<div class="my-4">
+		<ul class="grid grid-cols-2 gap-4 sm:grid-cols-3">
 			<% persons.forEach(person => { %>
 			<li class="overflow-hidden bg-white rounded shadow">
 				<a href="<%= `/persons/${person._id}` %>">
 					<div class="bg-gray-100">
 						<img
 							src="<%= person.picture %>"
-							class="object-cover w-full h-40"
+							class="object-cover w-full h-40 sm:h-52"
 							alt="<%= `${person.name}` %>"
 							loading="lazy"
 						/>
