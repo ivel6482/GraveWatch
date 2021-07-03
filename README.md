@@ -1,5 +1,14 @@
 # Searching4U
 
+This application was made in collaboration with a team of software engineers:
+
+- [Arnorld Pires](https://github.com/ArnoldPires)
+- [John Kemp-Cruz](https://github.com/JKC-Codes)
+- [Ilder V&eacute;lez (myself)](https://github.com/ivel6482)
+- [Joel C](https://github.com/jocantu)
+- [elloveronika](https://github.com/elloveronika)
+- [H&uuml;seyin Beller](https://github.com/HuseyinBeller)
+
 searching4u is a web application that provides users a space to provide information on missing people, including their last known location with an interactive map.
 
 https://searching-4u.herokuapp.com/
